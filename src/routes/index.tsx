@@ -1,0 +1,219 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import type { ReactNode } from "react";
+import heroBg from "@/assets/hero3.png";
+import { imgFor } from "@/components/ProjectCard";
+import { ClosingBand, Heading } from "@/components/site";
+import { home, pageMeta, philosophy, projects, solutions, stats } from "@/lib/content";
+
+export const Route = createFileRoute("/")({
+  head: () => pageMeta(home.metaTitle, home.metaDescription),
+  component: Home,
+});
+
+const featured = home.projects.names.map((n) => projects.find((p) => p.name === n)!);
+
+function PillLink({
+  to,
+  variant = "brand",
+  children,
+}: {
+  to: string;
+  variant?: "brand" | "outline" | "white";
+  children: ReactNode;
+}) {
+  const v = {
+    brand: "bg-brand text-brand-foreground shadow-lg shadow-brand/25 hover:bg-brand/90",
+    outline: "border border-brand/30 bg-card/70 text-brand-text backdrop-blur hover:bg-card",
+    white: "bg-white text-brand shadow-lg shadow-black/10 hover:bg-white/90",
+  }[variant];
+  return (
+    <Link
+      to={to}
+      className={`group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-semibold transition-all ${v}`}
+    >
+      {children}
+      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+    </Link>
+  );
+}
+
+function Home() {
+  return (
+    <>
+      {/* 1. Hero */}
+      <section className="bg-card">
+        <div className="mx-auto max-w-7xl px-6 pb-20 pt-20 md:pt-28">
+          <p className="reveal font-bold text-xs uppercase tracking-[0.1em] text-primary">
+            {home.hero.eyebrow}
+          </p>
+          <h1 className="reveal mt-6 max-w-6xl text-4xl font-bold uppercase leading-[1.05] text-primary sm:text-5xl md:text-6xl xl:text-7xl">
+            {home.hero.title} <span className="text-primary">{home.hero.titleAccent}</span>
+          </h1>
+          <p className="reveal mt-7 font-bold text-xs uppercase tracking-[0.2em] text-primary/70">
+            {home.hero.tagline}
+          </p>
+          <div className="reveal mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <p className="max-w-xl text-lg text-muted-foreground">{home.hero.text}</p>
+            <div className="flex flex-wrap gap-3">
+              <PillLink to="/solutions">{home.hero.primary}</PillLink>
+              <PillLink to="/contact" variant="outline">
+                {home.hero.secondary}
+              </PillLink>
+            </div>
+          </div>
+          <div className="reveal mt-14 overflow-hidden border border-border bg-secondary md:mt-16">
+            <img
+              src={heroBg}
+              alt=""
+              aria-hidden
+              width={1672}
+              height={940}
+              className="aspect-[16/9] w-full object-cover md:aspect-[21/9]"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 2. Introduction */}
+      <section className="border-t border-border bg-secondary">
+        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-12 lg:gap-16 lg:py-28">
+          <div className="lg:col-span-5">
+            <Heading eyebrow={home.intro.eyebrow} title={home.intro.heading} />
+          </div>
+          <div className="lg:col-span-7">
+            <p className="border-l-4 border-brand pl-6 text-lg leading-relaxed text-foreground/80 md:text-xl">
+              {home.intro.text}
+            </p>
+            <dl className="mt-12 grid border-t-4 border-brand bg-card sm:grid-cols-2">
+              {stats.map((s, i) => (
+                <div
+                  key={s.label}
+                  className={`border-x border-b border-border p-8 ${i ? "sm:border-l-0" : ""}`}
+                >
+                  <dt className="sr-only">{s.label}</dt>
+                  <dd>
+                    <span className="block text-4xl font-bold tracking-tight text-primary sm:text-5xl">
+                      {s.value}
+                    </span>
+                    <span className="mt-3 block text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                      {s.label}
+                    </span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Our Philosophy */}
+      <section className="border-y border-border bg-card">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+          <Heading eyebrow={home.philosophy.eyebrow} title={home.philosophy.heading} />
+          <ol className="mt-16 grid gap-10 lg:mt-20 lg:grid-cols-4 lg:gap-0">
+            {philosophy.map((p, i) => {
+              const last = i === philosophy.length - 1;
+              return (
+                <li key={p.name} className="group relative flex gap-6 lg:block">
+                  {/* Vertical connector on small screens */}
+                  {!last && (
+                    <span
+                      aria-hidden
+                      className="absolute -bottom-10 left-8 top-16 w-px bg-border lg:hidden"
+                    />
+                  )}
+                  <div className="flex items-center">
+                    <span className="relative z-10 grid h-16 w-16 shrink-0 place-items-center rounded-full border-2 border-brand bg-card font-mono text-lg font-bold text-brand-text transition-colors duration-300 group-hover:bg-brand group-hover:text-brand-foreground">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {!last && (
+                      <span aria-hidden className="hidden flex-1 items-center lg:flex">
+                        <span className="relative mx-4 h-px flex-1 bg-border">
+                          <span className="absolute inset-y-0 left-0 w-0 bg-brand transition-all duration-500 group-hover:w-full" />
+                        </span>
+                        <ArrowRight className="mr-4 h-4 w-4 text-brand-text" />
+                      </span>
+                    )}
+                  </div>
+                  <div className="pt-3 lg:pr-8 lg:pt-8">
+                    <h3 className="text-lg font-bold tracking-[0.18em] text-primary">{p.name}</h3>
+                    <p className="mt-3 max-w-[16rem] text-sm leading-relaxed text-muted-foreground">
+                      {p.text}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
+
+      {/* 4. Solutions */}
+      <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <Heading eyebrow={home.solutions.eyebrow} title={home.solutions.heading} />
+          <PillLink to="/solutions">{home.solutions.button}</PillLink>
+        </div>
+        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {solutions.map((s, i) => (
+            <Link
+              key={s.slug}
+              to="/solutions/$slug"
+              params={{ slug: s.slug }}
+              className="group flex min-h-40 flex-col justify-between border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand hover:bg-brand hover:shadow-xl hover:shadow-brand/20"
+            >
+              <div className="flex items-start justify-between">
+                <span className="font-mono text-xs text-brand-text transition-colors group-hover:text-brand-foreground/70">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <ArrowUpRight className="h-5 w-5 text-muted-foreground transition-all group-hover:rotate-45 group-hover:text-brand-foreground" />
+              </div>
+              <h3 className="mt-8 text-lg font-bold leading-snug text-primary transition-colors group-hover:text-brand-foreground">
+                {s.title}
+              </h3>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Selected Projects */}
+      <section className="bg-secondary">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <Heading eyebrow={home.projects.eyebrow} title={home.projects.heading} />
+            <PillLink to="/projects">{home.projects.button}</PillLink>
+          </div>
+          <div className="mt-14 grid gap-6 md:grid-cols-3">
+            {featured.map((p) => (
+              <article
+                key={p.name}
+                className="group flex flex-col overflow-hidden border border-border bg-card transition-shadow duration-300 hover:shadow-xl"
+              >
+                <div className="aspect-[4/3] overflow-hidden">
+                  <img
+                    src={imgFor(p)}
+                    alt={p.name}
+                    loading="lazy"
+                    width={1024}
+                    height={768}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-7">
+                  <h3 className="text-xl font-bold leading-snug text-primary">{p.name}</h3>
+                  <p className="mt-4 border-l-2 border-brand pl-4 text-sm leading-relaxed text-muted-foreground">
+                    {p.outcome}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Closing */}
+      <ClosingBand />
+    </>
+  );
+}
