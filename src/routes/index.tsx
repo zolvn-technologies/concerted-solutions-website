@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import heroBg from "@/assets/hero3.png";
 import { imgFor } from "@/components/ProjectCard";
 import { ClosingBand, Heading } from "@/components/site";
-import { home, pageMeta, philosophy, projects, solutions, stats } from "@/lib/content";
+import { home, lifecycle, pageMeta, philosophy, projects, solutions, stats } from "@/lib/content";
 
 export const Route = createFileRoute("/")({
   head: () => pageMeta(home.metaTitle, home.metaDescription),
@@ -42,36 +42,78 @@ function Home() {
   return (
     <>
       {/* 1. Hero */}
-      <section className="bg-card">
-        <div className="mx-auto max-w-7xl px-6 pb-20 pt-20 md:pt-28">
-          <p className="reveal font-bold text-xs uppercase tracking-[0.1em] text-primary">
-            {home.hero.eyebrow}
-          </p>
-          <h1 className="reveal mt-6 max-w-6xl text-4xl font-bold uppercase leading-[1.05] text-primary sm:text-5xl md:text-6xl xl:text-7xl">
-            {home.hero.title} <span className="text-primary">{home.hero.titleAccent}</span>
-          </h1>
-          <p className="reveal mt-7 font-bold text-xs uppercase tracking-[0.2em] text-primary/70">
-            {home.hero.tagline}
-          </p>
-          <div className="reveal mt-8 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <p className="max-w-xl text-lg text-muted-foreground">{home.hero.text}</p>
-            <div className="flex flex-wrap gap-3">
+      <section className="relative isolate overflow-hidden bg-card">
+        {/* Full-bleed image: wipes in, then drifts slowly */}
+        <div aria-hidden className="hero-wipe absolute inset-0 -z-10">
+          <img
+            src={heroBg}
+            alt=""
+            width={1672}
+            height={940}
+            className="hero-kenburns h-full w-full object-cover object-[70%_center]"
+          />
+        </div>
+        {/* Fade to the page colour so text stays readable in both themes */}
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 bg-gradient-to-t from-card via-card/80 to-card/30 lg:bg-gradient-to-r lg:from-card lg:via-card/85 lg:to-transparent"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 -z-10 [background-image:linear-gradient(var(--color-border)_1px,transparent_1px),linear-gradient(90deg,var(--color-border)_1px,transparent_1px)] [background-size:64px_64px] [mask-image:linear-gradient(to_right,black,transparent_55%)] opacity-40"
+        />
+
+        <div className="mx-auto flex min-h-[38rem] max-w-7xl flex-col justify-center px-6 py-24 lg:min-h-[calc(100svh-6rem)] lg:py-28">
+          <div className="max-w-3xl">
+            <p className="reveal inline-flex items-center gap-3 border border-brand/20 bg-card/80 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-brand-text backdrop-blur">
+              <span className="h-1.5 w-1.5 animate-pulse bg-brand" />
+              {home.hero.eyebrow}
+            </p>
+            <h1
+              className="reveal mt-8 text-4xl font-bold uppercase leading-[1.05] text-primary sm:text-5xl xl:text-7xl"
+              style={{ animationDelay: "0.1s" }}
+            >
+              {home.hero.title} <span className="text-brand-text">{home.hero.titleAccent}</span>
+            </h1>
+            <p
+              className="reveal mt-8 text-xs font-bold uppercase tracking-[0.25em] text-primary/70"
+              style={{ animationDelay: "0.2s" }}
+            >
+              {home.hero.tagline}
+            </p>
+            <p
+              className="reveal mt-5 max-w-xl text-lg leading-relaxed text-foreground/80"
+              style={{ animationDelay: "0.3s" }}
+            >
+              {home.hero.text}
+            </p>
+            <div className="reveal mt-10 flex flex-wrap gap-3" style={{ animationDelay: "0.4s" }}>
               <PillLink to="/solutions">{home.hero.primary}</PillLink>
               <PillLink to="/contact" variant="outline">
                 {home.hero.secondary}
               </PillLink>
             </div>
           </div>
-          <div className="reveal mt-14 overflow-hidden border border-border bg-secondary md:mt-16">
-            <img
-              src={heroBg}
-              alt=""
-              aria-hidden
-              width={1672}
-              height={940}
-              className="aspect-[16/9] w-full object-cover md:aspect-[21/9]"
-            />
+        </div>
+
+        {/* Lifecycle ticker */}
+        <div className="overflow-hidden border-t border-brand/30 bg-brand text-brand-foreground">
+          <div aria-hidden className="hero-marquee flex w-max">
+            {[0, 1].map((k) => (
+              <ul key={k} className="flex shrink-0">
+                {[...lifecycle, ...lifecycle].map((l, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center gap-8 py-4 pl-8 text-sm font-bold tracking-[0.25em]"
+                  >
+                    {l}
+                    <span className="h-1.5 w-1.5 rotate-45 bg-brand-foreground/50" />
+                  </li>
+                ))}
+              </ul>
+            ))}
           </div>
+          <p className="sr-only">{lifecycle.join(", ")}</p>
         </div>
       </section>
 
