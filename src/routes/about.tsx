@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Heading } from "@/components/site";
+import { Diamond, DiamondAccent, Heading, PageHero, pad } from "@/components/site";
 import { about, pageMeta, stats, whyCS } from "@/lib/content";
-import partner1 from "@/assets/partner/partner1.png";
-import partner2 from "@/assets/partner/partner2.png";
-import partner3 from "@/assets/partner/partner3.jpg";
-import partner4 from "@/assets/partner/partner4.jpg";
-import partner5 from "@/assets/partner/partner5.jpg";
-import partner6 from "@/assets/partner/partner6.jpg";
+import cloudalize from "@/assets/partner/partner1.png";
+import transtek from "@/assets/partner/transtek.png";
+import indoorview from "@/assets/partner/indoorview.png";
+import scenario from "@/assets/partner/scenario.png";
+import granlund from "@/assets/partner/granlund.png";
+import nomitech from "@/assets/partner/nomitech.png";
 
 export const Route = createFileRoute("/about")({
   head: () => pageMeta(about.metaTitle, about.metaDescription),
@@ -14,69 +14,55 @@ export const Route = createFileRoute("/about")({
 });
 
 // Logo files in src/assets/partner, in the same order as about.clients.logos.
-const logoSrcs = [partner1, partner2, partner3, partner4, partner5, partner6];
+const logoSrcs = [cloudalize, transtek, indoorview, scenario, granlund, nomitech];
 
 function About() {
   return (
     <>
       {/* Who we are */}
-      <section className="bg-card">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-20 pt-20 md:pt-28 lg:grid-cols-12 lg:gap-16 lg:pb-24">
-          <div className="reveal lg:col-span-5">
-            <p className="text-xs font-bold uppercase tracking-[0.1em] text-primary">
-              {about.eyebrow}
-            </p>
-            <h1 className="mt-6 text-5xl font-bold uppercase leading-[1.05] text-primary md:text-7xl">
-              {about.heading}
-            </h1>
-            <span aria-hidden className="mt-8 block h-1.5 w-20 bg-brand" />
-          </div>
-          <p className="reveal text-lg leading-[1.9] text-foreground/80 md:text-xl md:leading-[1.9] lg:col-span-7 lg:pt-12">
-            {about.text}
-          </p>
+      <PageHero eyebrow={about.eyebrow} title={about.heading} />
+      <section className="bg-night">
+        <div className="shell section grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <p className="type-body-lg text-mist lg:col-span-7">{about.text}</p>
+          <dl className="tile-grid content-start lg:col-span-5">
+            {stats.map((s) => (
+              <div key={s.label} className="relative bg-panel p-8">
+                <span aria-hidden className="absolute inset-x-0 top-0 h-[3px] bg-brand" />
+                <dt className="sr-only">{s.label}</dt>
+                <dd>
+                  <span className="block font-display text-5xl font-extrabold tracking-tight text-white">
+                    {s.value}
+                  </span>
+                  <span className="label mt-4 block text-slate-grey">{s.label}</span>
+                </dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section className="bg-brand text-brand-foreground">
-        <dl className="mx-auto grid max-w-7xl divide-y divide-brand-foreground/20 px-6 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
-          {stats.map((s, i) => (
-            <div key={s.label} className={`py-12 md:py-16 ${i ? "sm:pl-12" : "sm:pr-12"}`}>
-              <dt className="sr-only">{s.label}</dt>
-              <dd>
-                <span className="block text-5xl font-bold tracking-tight md:text-7xl">
-                  {s.value}
-                </span>
-                <span className="mt-4 block text-xs font-semibold uppercase tracking-[0.15em] text-brand-foreground/70">
-                  {s.label}
-                </span>
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
       {/* Why Concerted Solutions */}
-      <section className="border-b border-border bg-secondary">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 py-24 lg:grid-cols-12 lg:gap-16 lg:py-28">
+      <section className="border-y border-line bg-panel">
+        <div className="shell section grid gap-12 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-28">
+            <div className="lg:sticky lg:top-32">
               <Heading title={about.whyHeading} />
-              <span aria-hidden className="mt-8 block h-1.5 w-20 bg-brand" />
+              <DiamondAccent className="mt-8" />
             </div>
           </div>
-          <ol className="grid gap-x-12 sm:grid-cols-2 lg:col-span-8">
+          <ol className="tile-grid lg:col-span-8">
             {whyCS.map((w, i) => (
-              <li
-                key={w.t}
-                className="group flex gap-5 border-t border-border py-8 first:border-t-0 sm:[&:nth-child(2)]:border-t-0"
-              >
-                <span className="grid h-11 w-11 shrink-0 place-items-center bg-brand text-sm font-bold text-brand-foreground transition-colors duration-300 group-hover:bg-primary">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h3 className="text-lg font-bold leading-snug text-primary">{w.t}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{w.d}</p>
+              <li key={w.t} className="group relative bg-night p-7 md:p-8">
+                <span
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-brand transition-transform duration-300 group-hover:scale-x-100"
+                />
+                <div className="flex items-center gap-3">
+                  <Diamond className="h-3 w-3 text-brand" />
+                  <span className="label text-slate-grey">{pad(i + 1)}</span>
                 </div>
+                <h3 className="type-h4 mt-5">{w.t}</h3>
+                <p className="type-small mt-2 text-steel">{w.d}</p>
               </li>
             ))}
           </ol>
@@ -84,27 +70,23 @@ function About() {
       </section>
 
       {/* Our Clients */}
-      <section className="bg-card">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:py-28">
+      <section className="bg-night">
+        <div className="shell section">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-7">
               <Heading eyebrow={about.clients.eyebrow} title={about.clients.heading} />
             </div>
-            <p className="text-lg leading-relaxed text-muted-foreground lg:col-span-5">
-              {about.clients.text}
-            </p>
+            <p className="type-body-lg lg:col-span-5">{about.clients.text}</p>
           </div>
-          <ul className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3">
+          <ul className="tile-grid mt-14 [grid-template-columns:repeat(2,minmax(0,1fr))] sm:[grid-template-columns:repeat(3,minmax(0,1fr))]">
             {about.clients.logos.map((name, i) => (
-              <li
-                key={name}
-                className="overflow-hidden border border-border bg-[#efefef] transition-transform duration-300 hover:-translate-y-1"
-              >
+              <li key={name} className="grid place-items-center bg-white p-3">
+                {/* Multiply drops the white backgrounds baked into the logo files */}
                 <img
                   src={logoSrcs[i]}
                   alt={name}
                   loading="lazy"
-                  className="aspect-[2/1] w-full object-cover"
+                  className="aspect-[2/1] w-full object-contain mix-blend-multiply bg-white"
                 />
               </li>
             ))}

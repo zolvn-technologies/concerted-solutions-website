@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import type { ReactNode } from "react";
-import { ClosingBand } from "@/components/site";
+import { ClosingBand, Diamond, PageHero, pad } from "@/components/site";
 import { getSolution, pageMeta, technologies, technologyPage } from "@/lib/content";
 
 export const Route = createFileRoute("/technology-ecosystem")({
@@ -9,71 +9,90 @@ export const Route = createFileRoute("/technology-ecosystem")({
   component: Tech,
 });
 
-const pad = (n: number) => String(n).padStart(2, "0");
+// Logo files in public/tech, keyed by technology name
+const logos: Record<string, string> = {
+  "Nemetschek Group": "/tech/nemetschek-group.png",
+  dTwin: "/tech/dtwin.png",
+  Solibri: "/tech/solibri.png",
+  Bluebeam: "/tech/bluebeam.png",
+  Spacewell: "/tech/spacewell.png",
+  Allplan: "/tech/allplan.png",
+  dRofus: "/tech/drofus.png",
+  SCENARIO: "/tech/scenario.png",
+  CostOS: "/tech/cost-os_logo.webp",
+  "ABOT Systems®": "/tech/abot-systems.png",
+};
 
 const cellClass =
-  "group relative flex aspect-[4/3] flex-col justify-between bg-background p-6 transition-colors duration-300";
+  "group relative flex h-full min-h-48 flex-col justify-between gap-4 bg-white p-3 md:min-h-30 md:p-3 transition-colors duration-300";
 
 function Tech() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-card">
-        <div className="mx-auto max-w-7xl px-6 pb-20 pt-20 md:pt-28">
-          <p className="reveal text-xs font-bold uppercase tracking-[0.1em] text-primary">
-            {technologyPage.subline}
-          </p>
-          <h1 className="reveal mt-6 text-5xl font-bold uppercase leading-[1.05] text-primary md:text-7xl">
-            {technologyPage.heading}
-          </h1>
-          <p className="reveal mt-10 max-w-3xl border-l-4 border-brand pl-6 text-lg leading-relaxed text-foreground/80 md:text-xl">
-            {technologyPage.intro}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={technologyPage.subline}
+        title={technologyPage.heading}
+        text={technologyPage.intro}
+      />
 
       {/* Logo grid */}
-      <section className="mx-auto max-w-7xl px-6 py-20 lg:py-24">
-        <ul className="grid grid-cols-2 gap-px border border-border bg-border md:grid-cols-5">
-          {technologies.map((t, i) => {
-            const solution = t.link ? getSolution(t.link) : undefined;
-            const body: ReactNode = (
-              <>
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-brand transition-transform duration-500 group-hover:scale-x-100"
-                />
-                <span className="font-mono text-xs text-muted-foreground/60">{pad(i + 1)}</span>
-                <p className="text-center font-display text-xl font-black text-primary transition-colors duration-300 group-hover:text-brand-text md:text-2xl">
-                  {t.name}
-                </p>
-                <span className="flex min-h-4 items-end justify-between gap-2 text-xs text-muted-foreground">
-                  {solution && (
-                    <>
-                      <span className="leading-snug">{solution.title}</span>
-                      <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-brand-text transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </>
+      <section className="bg-night">
+        <div className="shell section">
+          <ul className="grid grid-cols-2 gap-px border border-line bg-line md:grid-cols-3 lg:grid-cols-5">
+            {technologies.map((t, i) => {
+              const solution = t.link ? getSolution(t.link) : undefined;
+              const body: ReactNode = (
+                <>
+                  <span
+                    aria-hidden
+                    className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-brand transition-transform duration-300 group-hover:scale-x-100"
+                  />
+                  <span className="flex items-center justify-between">
+                    <span className="label text-slate-grey">{pad(i + 1)}</span>
+                    <Diamond
+                      className={`h-2.5 w-2.5 transition-colors ${t.link ? "text-brand" : "text-line"}`}
+                    />
+                  </span>
+                  {logos[t.name] ? (
+                    <span className="flex h-24 items-center justify-center bg-white p-3">
+                      <img
+                        src={logos[t.name]}
+                        alt={t.name}
+                        loading="lazy"
+                        className="h-full w-full object-contain"
+                      />
+                    </span>
+                  ) : (
+                    <p className="flex h-24 items-center justify-center text-center font-display text-lg font-extrabold leading-tight text-white md:text-xl">
+                      {t.name}
+                    </p>
                   )}
-                </span>
-              </>
-            );
-            return (
-              <li key={t.name}>
-                {t.link ? (
-                  <Link
-                    to="/solutions/$slug"
-                    params={{ slug: t.link }}
-                    className={`${cellClass} hover:bg-secondary`}
-                  >
-                    {body}
-                  </Link>
-                ) : (
-                  <div className={cellClass}>{body}</div>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+                  <span className="flex min-h-8 items-end justify-between gap-2 text-xs leading-snug text-slate-grey">
+                    {/* {solution && (
+                      <>
+                        <span className="transition-colors group-hover:text-steel">
+                          {solution.title}
+                        </span>
+                        <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-brand transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                      </>
+                    )} */}
+                  </span>
+                </>
+              );
+              return (
+                <li key={t.name}>
+                  {t.link ? (
+                    <Link to="/solutions/$slug" params={{ slug: t.link }} className={cellClass}>
+                      {body}
+                    </Link>
+                  ) : (
+                    <div className={cellClass}>{body}</div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </section>
 
       <ClosingBand button={technologyPage.button} />

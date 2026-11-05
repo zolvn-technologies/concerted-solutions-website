@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ClosingBand } from "@/components/site";
+import { ClosingBand, PageHero } from "@/components/site";
 import { ProjectCard } from "@/components/ProjectCard";
 import { pageMeta, projectFilters, projects, projectsPage } from "@/lib/content";
 
@@ -17,28 +17,16 @@ function Projects() {
   const list = filter === "All" ? projects : projects.filter((p) => p.service === filter);
   return (
     <>
-      {/* Heading */}
-      <section className="bg-card">
-        <div className="mx-auto grid max-w-7xl gap-12 px-6 pb-16 pt-20 md:pt-28 lg:grid-cols-12 lg:gap-16 lg:pb-20">
-          <div className="reveal lg:col-span-7">
-            <p className="text-xs font-bold uppercase tracking-[0.1em] text-primary">
-              {projectsPage.eyebrow}
-            </p>
-            <h1 className="mt-6 text-4xl font-bold uppercase leading-[1.05] text-primary md:text-6xl">
-              {projectsPage.heading}
-            </h1>
-            <span aria-hidden className="mt-8 block h-1.5 w-20 bg-brand" />
-          </div>
-          <p className="reveal self-end border-l-4 border-brand pl-6 text-lg leading-[1.9] text-foreground/80 md:text-xl md:leading-[1.9] lg:col-span-5">
-            {projectsPage.text}
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={projectsPage.eyebrow}
+        title={projectsPage.heading}
+        text={projectsPage.text}
+      />
 
       {/* Filters + grid */}
-      <section className="border-t border-border bg-secondary">
-        <div className="mx-auto max-w-7xl px-6 py-16 lg:py-20">
-          <div className="flex flex-wrap gap-2">
+      <section className="bg-night">
+        <div className="shell section">
+          <div className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-2 md:mx-0 md:flex-wrap md:overflow-visible md:px-0 md:pb-0">
             {projectFilters.map((f) => {
               const active = filter === f;
               return (
@@ -47,23 +35,21 @@ function Projects() {
                   type="button"
                   aria-pressed={active}
                   onClick={() => setFilter(f)}
-                  className={`inline-flex items-center gap-2.5 border px-4 py-2.5 text-sm font-semibold transition-colors ${
+                  className={`inline-flex shrink-0 items-center gap-3 border px-4 py-3 font-display text-sm font-bold transition-colors ${
                     active
-                      ? "border-brand bg-brand text-brand-foreground"
-                      : "border-border bg-card text-primary hover:border-brand/50 hover:text-brand-text"
+                      ? "border-brand bg-brand text-night"
+                      : "border-line bg-panel text-white hover:border-brand"
                   }`}
                 >
                   {f}
-                  <span
-                    className={`font-mono text-[11px] ${active ? "text-brand-foreground/70" : "text-muted-foreground"}`}
-                  >
+                  <span className={`text-[11px] ${active ? "text-night/75" : "text-slate-grey"}`}>
                     {String(countFor(f)).padStart(2, "0")}
                   </span>
                 </button>
               );
             })}
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 [grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr))]">
             {list.map((p) => (
               <ProjectCard key={p.name} p={p} />
             ))}
