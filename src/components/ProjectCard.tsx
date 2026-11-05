@@ -1,18 +1,36 @@
 import type { Project } from "@/lib/content";
 import { Diamond } from "@/components/site";
-import hospital from "@/assets/p-hospital.jpg";
-import towers from "@/assets/p-towers.jpg";
-import airport from "@/assets/p-airport.jpg";
-import scan from "@/assets/scan.jpg";
 import hero from "@/assets/hero.jpg";
+import fakeeh from "@/assets/projects/fakeeh-hospital.jpg";
+import masar from "@/assets/projects/masar-destination.jpg";
+import sharjah from "@/assets/projects/sharjah-airport.jpg";
+import ace from "@/assets/projects/ace-bim.jpg";
+import schools from "@/assets/projects/abu-dhabi-schools.jpg";
+import markets from "@/assets/projects/public-markets.jpg";
+import alfagih from "@/assets/projects/alfagih-hospital.jpg";
+import parsons from "@/assets/projects/parsons-cost.jpg";
+import olaya from "@/assets/projects/olaya-towers.jpg";
+import granada from "@/assets/projects/granada-business-park.jpg";
+import uptown from "@/assets/projects/uptown-dubai.jpg";
+import difc from "@/assets/projects/difc-living.jpg";
 
-export const imgFor = (p: Project) => {
-  if (p.name.includes("Hospital")) return hospital;
-  if (p.name.includes("Airport")) return airport;
-  if (p.service === "Reality Capture") return scan;
-  if (p.service === "Digital Engineering & BIM") return towers;
-  return hero;
+// One image per project, keyed by project name in src/lib/content.ts
+const projectImages: Record<string, string> = {
+  "Fakeeh University Hospital": fakeeh,
+  "Masar Destination": masar,
+  "Sharjah International Airport Expansion": sharjah,
+  "Al Ain Consulting Engineers (ACE)": ace,
+  "Abu Dhabi & Al Ain Schools": schools,
+  "Abu Dhabi City Municipality – Public Markets": markets,
+  "Dr. Mohammad Alfagih Hospital": alfagih,
+  "Parsons – Cost Estimating Platform": parsons,
+  "Olaya Towers": olaya,
+  "Granada Business Park": granada,
+  "Uptown Dubai – Towers 3 & 4": uptown,
+  "DIFC Living & Innovation Two (CP-02)": difc,
 };
+
+export const imgFor = (p: Project) => projectImages[p.name] ?? hero;
 
 function ProjectImage({ p }: { p: Project }) {
   return (
@@ -21,8 +39,8 @@ function ProjectImage({ p }: { p: Project }) {
         src={imgFor(p)}
         alt={p.name}
         loading="lazy"
-        width={1024}
-        height={768}
+        width={1200}
+        height={800}
         className="img-grade h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
       />
       <span

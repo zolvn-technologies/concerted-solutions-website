@@ -18,7 +18,7 @@ The open items below are images, logos and one content question. These need inpu
 | 1 | About → Our Clients | "Content: client logo wall." | Six logos labelled **Cloudalize, Transtek, IndoorView, Scenario Advantage, Granlund, Nomitech** (`about.clients.logos` in `src/lib/content.ts`, images in `src/assets/partner/`). These names are not in the PDF. They look like technology partners, not clients. | Get the real client logos and names from CS, then replace the list and images. |
 | 2 | Industries | "Sector cards (8, each with an image)" | The 8 cards show icons, not images. | Get 8 sector images from CS and add them to the cards. |
 | 3 | Technology Ecosystem | "Logo grid (10, in this order)" | Done. All 10 logos are in place (`public/tech/`). | Nothing needed. |
-| 4 | Projects + Home featured projects | "Each project card shows: image…" | The 12 projects share 5 generic images (`p-hospital`, `p-towers`, `p-airport`, `scan`, `hero`), picked by name or service in `src/components/ProjectCard.tsx`. | Get a real image for each project from CS. |
+| 4 | Projects + Home featured projects | "Each project card shows: image…" | Each project now has its own image (`src/assets/projects/`). These are **AI-generated illustrations**, not photos of the real buildings. | Replace with real project photos from CS when available (same filenames). |
 | 5 | Home → Hero | "hero image (no video); all images on the site will be selected together with CS." | Uses `src/assets/hero3.png`. | Confirm with CS that this hero image is approved. |
 
 ## Notes (no action needed unless CS disagrees)
