@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Diamond, DiamondAccent, Heading, PageHero, pad } from "@/components/site";
-import { TechLogoGrid } from "@/components/tech-logo-grid";
+import { ClientLogoGrid } from "@/components/client-logo-grid";
 import { about, experts, pageMeta, stats, whyCS } from "@/lib/content";
 
 export const Route = createFileRoute("/about")({
@@ -101,7 +101,7 @@ function About() {
             </div>
             <p className="type-body-lg lg:col-span-5">{about.clients.text}</p>
           </div>
-          <TechLogoGrid className="mt-14" />
+          <ClientLogoGrid className="mt-14" />
         </div>
       </section>
     </>

@@ -401,6 +401,41 @@ export const experts = {
   ],
 };
 
+export const clientLogos = [
+  { name: "JLL", logo: "/clients/jll.png" },
+  { name: "Knight Frank", logo: "/clients/knight-frank.png" },
+  { name: "Parsons", logo: "/clients/parsons.png" },
+  { name: "Emaar", logo: "/clients/emaar.png" },
+  { name: "El Seif", logo: "/clients/el-seif.png" },
+  { name: "Al Madinah Region Development Authority", logo: "/clients/al-madinah-development-authority.png" },
+  { name: "Abu Dhabi City Municipality", logo: "/clients/abu-dhabi-city-municipality.png" },
+  { name: "Sharjah Airport", logo: "/clients/sharjah-airport.png" },
+  { name: "Al Bawani", logo: "/clients/al-bawani.png" },
+  { name: "Ali & Sons Contracting", logo: "/clients/ali-and-sons.png" },
+  { name: "Red Sea Global", logo: "/clients/red-sea-global.png" },
+  { name: "Bainona Engineering Consultancy", logo: "/clients/bainona.png" },
+  { name: "LWK + Partners", logo: "/clients/lwk-partners.png" },
+  { name: "wasl properties", logo: "/clients/wasl-properties.png" },
+  { name: "BESIX", logo: "/clients/besix.png" },
+  { name: "Reem Emirates Aluminium", logo: "/clients/reem-emirates-aluminium.png" },
+  { name: "depa", logo: "/clients/depa.png" },
+  { name: "Carrara", logo: "/clients/carrara.png" },
+  { name: "Osool", logo: "/clients/osool.png" },
+  { name: "Innovo", logo: "/clients/innovo.png" },
+  { name: "Unger", logo: "/clients/unger.png" },
+  { name: "Akdital", logo: "/clients/akdital.png" },
+  { name: "Diamond Developers", logo: "/clients/diamond-developers.png" },
+  { name: "Masar", logo: "/clients/masar.png" },
+  { name: "Boutique Group", logo: "/clients/boutique-group.png" },
+  { name: "Fakeeh Care Group", logo: "/clients/fakeeh-care-group.png" },
+  { name: "Shapoorji Pallonji", logo: "/clients/shapoorji-pallonji.png" },
+  { name: "CDI Uganda", logo: "/clients/cdi-uganda.png" },
+  { name: "Coastal Contracting Co", logo: "/clients/coastal-contracting.png" },
+  { name: "SCS", logo: "/clients/scs.png" },
+  { name: "Trojan General Contracting", logo: "/clients/trojan.png" },
+  { name: "Starwood Industries", logo: "/clients/starwood-industries.png" },
+];
+
 export const whyCS = [
   { t: "Regional Experience, Global Alliances", d: "Regional know-how, international technology." },
   { t: "Platforms and Services", d: "The tools and the team, under one point of accountability." },
@@ -637,15 +672,31 @@ export const technologyPage = {
 };
 
 export const technologies = [
-  { name: "Nemetschek Group" },
-  { name: "dTwin", link: "digital-twins" },
-  { name: "Solibri" },
-  { name: "Bluebeam" },
-  { name: "Spacewell", link: "asset-management" },
-  { name: "OMEO" },
-  { name: "CostOS", link: "project-cost-information-management" },
-  { name: "SCENARIO", link: "project-cost-information-management" },
-  { name: "ABOT Systems®", link: "high-performance-computing" },
+  { name: "Nemetschek Group", logo: "/tech/ecosystem/nemetschek-group.png" },
+  { name: "dTwin", logo: "/tech/ecosystem/dtwin.png", link: "digital-twins" },
+  { name: "Solibri", logo: "/tech/ecosystem/solibri.png" },
+  { name: "Bluebeam", logo: "/tech/ecosystem/bluebeam.png" },
+  { name: "Spacewell", logo: "/tech/ecosystem/spacewell.png", link: "asset-management" },
+  { name: "Allplan", logo: "/tech/ecosystem/allplan.png" },
+  { name: "dRofus", logo: "/tech/ecosystem/drofus.png" },
+  {
+    name: "CostOS",
+    logo: "/tech/ecosystem/cost-os.png",
+    link: "project-cost-information-management",
+  },
+  {
+    name: "SCENARIO",
+    logo: "/tech/ecosystem/scenario.png",
+    link: "project-cost-information-management",
+  },
+  {
+    name: "ABOT Systems®",
+    logo: "/tech/ecosystem/abot-systems.png",
+    link: "high-performance-computing",
+  },
+  { name: "OMEO", logo: "/tech/ecosystem/omeo.png" },
+  { name: "INS", logo: "/tech/ecosystem/ins.png" },
+  { name: "Electra Surveying", logo: "/tech/ecosystem/electra-surveying.png" },
 ];
 
 export const pageMeta = (title: string, description: string) => ({

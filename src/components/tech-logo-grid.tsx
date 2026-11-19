@@ -3,28 +3,16 @@ import type { ReactNode } from "react";
 import { Diamond, pad } from "@/components/site";
 import { technologies } from "@/lib/content";
 
-// Logo files in public/tech, keyed by technology name
-const logos: Record<string, string> = {
-  "Nemetschek Group": "/tech/nemetschek-group.png",
-  dTwin: "/tech/dtwin.png",
-  Solibri: "/tech/solibri.png",
-  Bluebeam: "/tech/bluebeam.png",
-  Spacewell: "/tech/spacewell.png",
-  OMEO: "/tech/omeo.png",
-  SCENARIO: "/tech/scenario.png",
-  CostOS: "/tech/cost-os_logo.webp",
-  "ABOT Systems®": "/tech/abot-systems.png",
-};
-
 const cellClass =
-  "group relative flex h-full min-h-48 flex-col justify-between gap-4 bg-white p-3 md:min-h-30 md:p-3 transition-colors duration-300";
+  "group relative flex h-full flex-col gap-3 bg-white p-4 transition-colors duration-300 md:p-5";
 
-/** Numbered logo tiles for the technology list; used on Technology and About. */
+/**
+ * Numbered logo tiles for the technology ecosystem. Rows wrap and the last
+ * row is centred, so any number of technologies lays out evenly.
+ */
 export function TechLogoGrid({ className = "" }: { className?: string }) {
   return (
-    <ul
-      className={`grid grid-cols-2 gap-px border border-line bg-line md:grid-cols-3 ${className}`}
-    >
+    <ul className={`flex flex-wrap justify-center gap-px ${className}`}>
       {technologies.map((t, i) => {
         const body: ReactNode = (
           <>
@@ -38,25 +26,21 @@ export function TechLogoGrid({ className = "" }: { className?: string }) {
                 className={`h-2.5 w-2.5 transition-colors ${t.link ? "text-brand" : "text-line"}`}
               />
             </span>
-            {logos[t.name] ? (
-              <span className="flex h-24 items-center justify-center bg-white p-3">
-                <img
-                  src={logos[t.name]}
-                  alt={t.name}
-                  loading="lazy"
-                  className="h-full w-full object-contain"
-                />
-              </span>
-            ) : (
-              <p className="flex h-24 items-center justify-center text-center font-display text-lg font-extrabold leading-tight text-white md:text-xl">
-                {t.name}
-              </p>
-            )}
-            <span className="min-h-8" />
+            <span className="flex h-24 items-center justify-center px-2 pb-4 md:h-28">
+              <img
+                src={t.logo}
+                alt={t.name}
+                loading="lazy"
+                className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
+              />
+            </span>
           </>
         );
         return (
-          <li key={t.name}>
+          <li
+            key={t.name}
+            className="basis-[calc(50%-1px)] md:basis-[calc(33.333%-1px)] lg:basis-[calc(20%-1px)]"
+          >
             {t.link ? (
               <Link to="/solutions/$slug" params={{ slug: t.link }} className={cellClass}>
                 {body}
