@@ -1,20 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Diamond, DiamondAccent, Heading, PageHero, pad } from "@/components/site";
-import { about, pageMeta, stats, whyCS } from "@/lib/content";
-import cloudalize from "@/assets/partner/partner1.png";
-import transtek from "@/assets/partner/transtek.png";
-import indoorview from "@/assets/partner/indoorview.png";
-import scenario from "@/assets/partner/scenario.png";
-import granlund from "@/assets/partner/granlund.png";
-import nomitech from "@/assets/partner/nomitech.png";
+import { TechLogoGrid } from "@/components/tech-logo-grid";
+import { about, experts, pageMeta, stats, whyCS } from "@/lib/content";
 
 export const Route = createFileRoute("/about")({
   head: () => pageMeta(about.metaTitle, about.metaDescription),
   component: About,
 });
-
-// Logo files in src/assets/partner, in the same order as about.clients.logos.
-const logoSrcs = [cloudalize, transtek, indoorview, scenario, granlund, nomitech];
 
 function About() {
   return (
@@ -38,6 +30,37 @@ function About() {
               </div>
             ))}
           </dl>
+        </div>
+      </section>
+
+      {/* Partners & Subject Matter Experts */}
+      <section className="border-t border-line bg-night">
+        <div className="shell section">
+          <Heading eyebrow={experts.eyebrow} title={experts.heading} />
+          <ul className="mt-14 grid grid-cols-2 gap-x-6 gap-y-12 md:grid-cols-3 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-14">
+            {experts.people.map((p) => (
+              <li key={p.name} className="group flex flex-col items-center text-center">
+                <div className="relative">
+                  <span
+                    aria-hidden
+                    className="absolute -inset-2 rounded-full border border-line transition-colors duration-300 group-hover:border-brand/60"
+                  />
+                  <div className="relative h-32 w-32 overflow-hidden rounded-full bg-panel ring-[3px] ring-brand md:h-36 md:w-36 lg:h-40 lg:w-40">
+                    <img
+                      src={p.img}
+                      alt={p.name}
+                      width={320}
+                      height={320}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                </div>
+                <h3 className="type-h4 mt-7 text-white">{p.name}</h3>
+                <p className="type-small mt-1.5 max-w-[16rem] text-steel">{p.org}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -78,19 +101,7 @@ function About() {
             </div>
             <p className="type-body-lg lg:col-span-5">{about.clients.text}</p>
           </div>
-          <ul className="tile-grid mt-14 [grid-template-columns:repeat(2,minmax(0,1fr))] sm:[grid-template-columns:repeat(3,minmax(0,1fr))]">
-            {about.clients.logos.map((name, i) => (
-              <li key={name} className="grid place-items-center bg-white p-3">
-                {/* Multiply drops the white backgrounds baked into the logo files */}
-                <img
-                  src={logoSrcs[i]}
-                  alt={name}
-                  loading="lazy"
-                  className="aspect-[2/1] w-full object-contain mix-blend-multiply bg-white"
-                />
-              </li>
-            ))}
-          </ul>
+          <TechLogoGrid className="mt-14" />
         </div>
       </section>
     </>

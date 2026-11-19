@@ -383,8 +383,22 @@ export const about = {
     eyebrow: "Our Clients",
     heading: "Trusted by leading organizations",
     text: "Developers, contractors, consultants and government entities across the region. In Saudi Arabia, projects are delivered in partnership with Saudi-NMG.",
-    logos: ["Cloudalize", "Transtek", "IndoorView", "Scenario Advantage", "Granlund", "Nomitech"],
   },
+};
+
+export const experts = {
+  eyebrow: "Partners & Subject Matter Experts",
+  heading: "A Network of Experts",
+  people: [
+    { name: "Sultan Alhumaidan", org: "Nemetschek Group", img: "/experts/sultan-alhumaidan.jpg" },
+    { name: "Adnaan Khokhar", org: "SCENARIO", img: "/experts/adnaan-khokhar.jpg" },
+    { name: "Dr Bilal Succar", org: "ChangeAgents AEC", img: "/experts/bilal-succar.jpg" },
+    { name: "Omar Faouri", org: "Nomitech", img: "/experts/omar-faouri.jpg" },
+    { name: "Ljubica Bogdanovska", org: "Electra Surveying Engineering Services", img: "/experts/ljubica-bogdanovska.jpg" },
+    { name: "Igor Pupaleski", org: "Intelligent Network Solutions", img: "/experts/igor-pupaleski.jpg" },
+    { name: "Husam Khaskieh", org: "Transtek Systems", img: "/experts/husam-khaskieh.jpg" },
+    { name: "Jean-Daniel Tragus", org: "OMEO Space", img: "/experts/jean-daniel-tragus.jpg" },
+  ],
 };
 
 export const whyCS = [
@@ -628,8 +642,7 @@ export const technologies = [
   { name: "Solibri" },
   { name: "Bluebeam" },
   { name: "Spacewell", link: "asset-management" },
-  { name: "Allplan" },
-  { name: "dRofus" },
+  { name: "OMEO" },
   { name: "CostOS", link: "project-cost-information-management" },
   { name: "SCENARIO", link: "project-cost-information-management" },
   { name: "ABOT Systems®", link: "high-performance-computing" },
