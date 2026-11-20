@@ -434,3 +434,86 @@
     }
   }
 }
+
+/* ---------- Vector motion ----------
+   Line-drawing, slow orbits and a scan sweep for solution tiles and the
+   solution hero. Lucide paths are under 100 units long, so a 100-unit dash
+   draws every stroke from nothing to complete. */
+@layer base {
+  .draw-on-hover * {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+  }
+  .group:hover .draw-on-hover *,
+  .group:focus-visible .draw-on-hover * {
+    animation: draw 1.6s cubic-bezier(0.6, 0, 0.2, 1) both;
+  }
+  .draw-in * {
+    stroke-dasharray: 100;
+    animation: draw 2.2s cubic-bezier(0.6, 0, 0.2, 1) 0.3s both;
+  }
+  .spin-slow {
+    animation: spin 48s linear infinite;
+  }
+  .spin-slow-reverse {
+    animation: spin 64s linear infinite reverse;
+  }
+  .orbit {
+    animation: spin 14s linear infinite;
+  }
+  .scan-sweep {
+    animation: scan 5s ease-in-out infinite;
+  }
+  .pulse-soft {
+    animation: pulse-soft 3.2s ease-in-out infinite;
+  }
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 100;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes scan {
+    0%,
+    100% {
+      transform: translateY(-45%);
+      opacity: 0;
+    }
+    15%,
+    85% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(45%);
+    }
+  }
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .group:hover .draw-on-hover *,
+    .draw-in *,
+    .spin-slow,
+    .spin-slow-reverse,
+    .orbit,
+    .scan-sweep,
+    .pulse-soft {
+      animation: none;
+    }
+  }
+}

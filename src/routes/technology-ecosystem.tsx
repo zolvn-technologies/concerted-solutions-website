@@ -1,30 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ClosingBand, PageHero } from "@/components/site";
-import { TechLogoGrid } from "@/components/tech-logo-grid";
-import { pageMeta, technologyPage } from "@/lib/content";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
+// Old address, kept so existing links and search results still work.
 export const Route = createFileRoute("/technology-ecosystem")({
-  head: () => pageMeta(technologyPage.metaTitle, technologyPage.metaDescription),
-  component: Tech,
+  beforeLoad: () => {
+    throw redirect({ to: "/partners-platforms", statusCode: 301 });
+  },
 });
-
-function Tech() {
-  return (
-    <>
-      <PageHero
-        eyebrow={technologyPage.subline}
-        title={technologyPage.heading}
-        text={technologyPage.intro}
-      />
-
-      {/* Logo grid */}
-      <section className="bg-night">
-        <div className="shell section">
-          <TechLogoGrid />
-        </div>
-      </section>
-
-      <ClosingBand button={technologyPage.button} />
-    </>
-  );
-}

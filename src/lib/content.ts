@@ -376,7 +376,7 @@ export const about = {
   metaDescription:
     "Founded in Dubai in 2016, Concerted Solutions connects engineering expertise, technology, and integration across the built-asset lifecycle.",
   eyebrow: "About CS",
-  heading: "Who we are",
+  heading: "Our Story",
   text: "Concerted Solutions is a digital engineering and technology company founded in Dubai in 2016. We combine engineering expertise, advanced technologies and AI-enabled workflows to support built assets from planning and design through construction, handover and operation. Our founders bring extensive regional experience, backed by global technology alliances.",
   whyHeading: "Why Concerted Solutions",
   clients: {
@@ -386,16 +386,48 @@ export const about = {
   },
 };
 
+// TODO: replace the placeholder names, roles, bios, photos and LinkedIn URLs
+// with the real founders. Put photos in public/leadership/ (square or 4:5).
+// A person without `img` shows their initials instead of a photo.
+export const leadership = {
+  eyebrow: "Leadership",
+  heading: "Led by Our Founders",
+  people: [
+    {
+      name: "Founder Name",
+      role: "Co-Founder & Managing Director",
+      bio: "Short bio: background, years of experience and area of focus.",
+      img: "",
+      linkedin: "https://www.linkedin.com/",
+    },
+    {
+      name: "Founder Name",
+      role: "Co-Founder & Technical Director",
+      bio: "Short bio: background, years of experience and area of focus.",
+      img: "",
+      linkedin: "https://www.linkedin.com/",
+    },
+  ],
+};
+
 export const experts = {
   eyebrow: "Partners & Subject Matter Experts",
-  heading: "A Network of Experts",
+  heading: "Expert Network",
   people: [
     { name: "Sultan Alhumaidan", org: "Nemetschek Group", img: "/experts/sultan-alhumaidan.jpg" },
     { name: "Adnaan Khokhar", org: "SCENARIO", img: "/experts/adnaan-khokhar.jpg" },
     { name: "Dr Bilal Succar", org: "ChangeAgents AEC", img: "/experts/bilal-succar.jpg" },
     { name: "Omar Faouri", org: "Nomitech", img: "/experts/omar-faouri.jpg" },
-    { name: "Ljubica Bogdanovska", org: "Electra Surveying Engineering Services", img: "/experts/ljubica-bogdanovska.jpg" },
-    { name: "Igor Pupaleski", org: "Intelligent Network Solutions", img: "/experts/igor-pupaleski.jpg" },
+    {
+      name: "Ljubica Bogdanovska",
+      org: "Electra Surveying Engineering Services",
+      img: "/experts/ljubica-bogdanovska.jpg",
+    },
+    {
+      name: "Igor Pupaleski",
+      org: "Intelligent Network Solutions",
+      img: "/experts/igor-pupaleski.jpg",
+    },
     { name: "Husam Khaskieh", org: "Transtek Systems", img: "/experts/husam-khaskieh.jpg" },
     { name: "Jean-Daniel Tragus", org: "OMEO Space", img: "/experts/jean-daniel-tragus.jpg" },
   ],
@@ -407,7 +439,10 @@ export const clientLogos = [
   { name: "Parsons", logo: "/clients/parsons.png" },
   { name: "Emaar", logo: "/clients/emaar.png" },
   { name: "El Seif", logo: "/clients/el-seif.png" },
-  { name: "Al Madinah Region Development Authority", logo: "/clients/al-madinah-development-authority.png" },
+  {
+    name: "Al Madinah Region Development Authority",
+    logo: "/clients/al-madinah-development-authority.png",
+  },
   { name: "Abu Dhabi City Municipality", logo: "/clients/abu-dhabi-city-municipality.png" },
   { name: "Sharjah Airport", logo: "/clients/sharjah-airport.png" },
   { name: "Al Bawani", logo: "/clients/al-bawani.png" },

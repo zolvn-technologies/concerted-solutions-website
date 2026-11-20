@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowUpRight } from "lucide-react";
+import { createFileRoute } from "@tanstack/react-router";
 import heroBg from "@/assets/hero3.png";
 import { ProjectCard } from "@/components/ProjectCard";
 import {
@@ -9,8 +8,8 @@ import {
   DiamondAccent,
   DiamondCluster,
   Heading,
+  SolutionTile,
   Timeline,
-  pad,
 } from "@/components/site";
 import { home, lifecycle, pageMeta, philosophy, projects, solutions, stats } from "@/lib/content";
 
@@ -147,24 +146,10 @@ function Home() {
             {home.solutions.button}
           </CTA>
         </div>
-        <ul className="tile-grid mt-14">
-          {solutions.map((s, i) => (
-            <li key={s.slug} className="bg-panel">
-              <Link
-                to="/solutions/$slug"
-                params={{ slug: s.slug }}
-                className="group relative flex h-full min-h-40 flex-col justify-between p-6 transition-colors duration-300 hover:bg-night"
-              >
-                <span
-                  aria-hidden
-                  className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-brand transition-transform duration-300 group-hover:scale-x-100"
-                />
-                <div className="flex items-start justify-between">
-                  <span className="label text-brand">{pad(i + 1)}</span>
-                  <ArrowUpRight className="h-5 w-5 text-slate-grey transition-all duration-300 group-hover:rotate-45 group-hover:text-brand" />
-                </div>
-                <h3 className="type-h4 mt-8">{s.title}</h3>
-              </Link>
+        <ul className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {solutions.map((s) => (
+            <li key={s.slug}>
+              <SolutionTile slug={s.slug} />
             </li>
           ))}
         </ul>
@@ -175,7 +160,7 @@ function Home() {
         <div className="shell section">
           <div className="flex flex-wrap items-end justify-between gap-8">
             <Heading eyebrow={home.projects.eyebrow} title={home.projects.heading} />
-            <CTA to="/projects" variant="tertiary">
+            <CTA to="/our-work" variant="tertiary">
               {home.projects.button}
             </CTA>
           </div>

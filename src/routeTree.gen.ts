@@ -11,10 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HowWeDeliverRouteImport } from './routes/how-we-deliver'
 import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as OurWorkRouteImport } from './routes/our-work'
+import { Route as PartnersPlatformsRouteImport } from './routes/partners-platforms'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as SectorsRouteImport } from './routes/sectors'
 import { Route as TechnologyEcosystemRouteImport } from './routes/technology-ecosystem'
 import { Route as SolutionsIndexRouteImport } from './routes/solutions.index'
 import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
@@ -27,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApproachRoute = ApproachRouteImport.update({
+  id: '/approach',
+  path: '/approach',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -44,9 +53,24 @@ const IndustriesRoute = IndustriesRouteImport.update({
   path: '/industries',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OurWorkRoute = OurWorkRouteImport.update({
+  id: '/our-work',
+  path: '/our-work',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnersPlatformsRoute = PartnersPlatformsRouteImport.update({
+  id: '/partners-platforms',
+  path: '/partners-platforms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SectorsRoute = SectorsRouteImport.update({
+  id: '/sectors',
+  path: '/sectors',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TechnologyEcosystemRoute = TechnologyEcosystemRouteImport.update({
@@ -68,10 +92,14 @@ const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
   '/how-we-deliver': typeof HowWeDeliverRoute
   '/industries': typeof IndustriesRoute
+  '/our-work': typeof OurWorkRoute
+  '/partners-platforms': typeof PartnersPlatformsRoute
   '/projects': typeof ProjectsRoute
+  '/sectors': typeof SectorsRoute
   '/technology-ecosystem': typeof TechnologyEcosystemRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/': typeof SolutionsIndexRoute
@@ -79,10 +107,14 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
   '/how-we-deliver': typeof HowWeDeliverRoute
   '/industries': typeof IndustriesRoute
+  '/our-work': typeof OurWorkRoute
+  '/partners-platforms': typeof PartnersPlatformsRoute
   '/projects': typeof ProjectsRoute
+  '/sectors': typeof SectorsRoute
   '/technology-ecosystem': typeof TechnologyEcosystemRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions': typeof SolutionsIndexRoute
@@ -91,10 +123,14 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/approach': typeof ApproachRoute
   '/contact': typeof ContactRoute
   '/how-we-deliver': typeof HowWeDeliverRoute
   '/industries': typeof IndustriesRoute
+  '/our-work': typeof OurWorkRoute
+  '/partners-platforms': typeof PartnersPlatformsRoute
   '/projects': typeof ProjectsRoute
+  '/sectors': typeof SectorsRoute
   '/technology-ecosystem': typeof TechnologyEcosystemRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/solutions/': typeof SolutionsIndexRoute
@@ -104,10 +140,14 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/approach'
     | '/contact'
     | '/how-we-deliver'
     | '/industries'
+    | '/our-work'
+    | '/partners-platforms'
     | '/projects'
+    | '/sectors'
     | '/technology-ecosystem'
     | '/solutions/$slug'
     | '/solutions/'
@@ -115,10 +155,14 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/approach'
     | '/contact'
     | '/how-we-deliver'
     | '/industries'
+    | '/our-work'
+    | '/partners-platforms'
     | '/projects'
+    | '/sectors'
     | '/technology-ecosystem'
     | '/solutions/$slug'
     | '/solutions'
@@ -126,10 +170,14 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/approach'
     | '/contact'
     | '/how-we-deliver'
     | '/industries'
+    | '/our-work'
+    | '/partners-platforms'
     | '/projects'
+    | '/sectors'
     | '/technology-ecosystem'
     | '/solutions/$slug'
     | '/solutions/'
@@ -138,10 +186,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  ApproachRoute: typeof ApproachRoute
   ContactRoute: typeof ContactRoute
   HowWeDeliverRoute: typeof HowWeDeliverRoute
   IndustriesRoute: typeof IndustriesRoute
+  OurWorkRoute: typeof OurWorkRoute
+  PartnersPlatformsRoute: typeof PartnersPlatformsRoute
   ProjectsRoute: typeof ProjectsRoute
+  SectorsRoute: typeof SectorsRoute
   TechnologyEcosystemRoute: typeof TechnologyEcosystemRoute
   SolutionsSlugRoute: typeof SolutionsSlugRoute
   SolutionsIndexRoute: typeof SolutionsIndexRoute
@@ -161,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/approach': {
+      id: '/approach'
+      path: '/approach'
+      fullPath: '/approach'
+      preLoaderRoute: typeof ApproachRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -184,11 +243,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndustriesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/our-work': {
+      id: '/our-work'
+      path: '/our-work'
+      fullPath: '/our-work'
+      preLoaderRoute: typeof OurWorkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partners-platforms': {
+      id: '/partners-platforms'
+      path: '/partners-platforms'
+      fullPath: '/partners-platforms'
+      preLoaderRoute: typeof PartnersPlatformsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
       fullPath: '/projects'
       preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sectors': {
+      id: '/sectors'
+      path: '/sectors'
+      fullPath: '/sectors'
+      preLoaderRoute: typeof SectorsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/technology-ecosystem': {
@@ -218,10 +298,14 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  ApproachRoute: ApproachRoute,
   ContactRoute: ContactRoute,
   HowWeDeliverRoute: HowWeDeliverRoute,
   IndustriesRoute: IndustriesRoute,
+  OurWorkRoute: OurWorkRoute,
+  PartnersPlatformsRoute: PartnersPlatformsRoute,
   ProjectsRoute: ProjectsRoute,
+  SectorsRoute: SectorsRoute,
   TechnologyEcosystemRoute: TechnologyEcosystemRoute,
   SolutionsSlugRoute: SolutionsSlugRoute,
   SolutionsIndexRoute: SolutionsIndexRoute,

@@ -51,7 +51,7 @@ function ProjectImage({ p }: { p: Project }) {
   );
 }
 
-// Full card for /projects; `compact` shows image, name and outcome only (Home).
+// Full card for /our-work; `compact` shows image, name and outcome only (Home).
 export function ProjectCard({ p, compact }: { p: Project; compact?: boolean }) {
   const meta = [
     ["Client", p.client],

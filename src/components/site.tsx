@@ -2,6 +2,7 @@ import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   ArrowRight,
+  ArrowUpRight,
   Boxes,
   Building2,
   Calculator,
@@ -23,12 +24,12 @@ import { contact, getSolution, home, solutions } from "@/lib/content";
 import logo from "@/assets/logo.png";
 
 const nav = [
-  { to: "/about", label: "About" },
-  { to: "/how-we-deliver", label: "How We Deliver" },
   { to: "/solutions", label: "Solutions" },
-  { to: "/industries", label: "Industries" },
-  { to: "/projects", label: "Projects" },
-  { to: "/technology-ecosystem", label: "Technology" },
+  { to: "/sectors", label: "Sectors" },
+  { to: "/our-work", label: "Our Work" },
+  { to: "/approach", label: "Approach" },
+  { to: "/partners-platforms", label: "Partners & Platforms" },
+  { to: "/about", label: "About" },
 ] as const;
 
 export const pad = (n: number) => String(n).padStart(2, "0");
@@ -183,7 +184,7 @@ function MegaMenu({ onNavigate }: { onNavigate: () => void }) {
 }
 
 const navLink =
-  "group relative flex h-full items-center px-3.5 font-display text-[15px] font-semibold text-mist transition-colors hover:text-white data-[status=active]:text-white xl:px-4";
+  "group relative flex h-full items-center whitespace-nowrap px-3.5 font-display text-[15px] font-semibold text-mist transition-colors hover:text-white data-[status=active]:text-white xl:px-4";
 const navBar =
   "absolute inset-x-3.5 bottom-0 h-[3px] origin-left scale-x-0 bg-brand transition-transform duration-300 group-hover:scale-x-100 group-data-[status=active]:scale-x-100 xl:inset-x-4";
 
@@ -401,12 +402,15 @@ export function PageHero({
   sub,
   text,
   children,
+  aside,
 }: {
   eyebrow?: ReactNode;
   title: string;
   sub?: string;
   text?: string;
   children?: ReactNode;
+  /** Visual for the right-hand column on large screens; replaces the diamond cluster. */
+  aside?: ReactNode;
 }) {
   return (
     <section className="relative overflow-hidden border-b border-line bg-night">
@@ -414,9 +418,13 @@ export function PageHero({
         aria-hidden
         className="absolute inset-0 [background-image:linear-gradient(var(--line)_1px,transparent_1px),linear-gradient(90deg,var(--line)_1px,transparent_1px)] [background-size:80px_80px] [mask-image:linear-gradient(to_left,black,transparent_60%)] opacity-35"
       />
-      <DiamondCluster className="absolute -right-10 top-1/2 hidden h-80 w-96 -translate-y-1/2 lg:block xl:right-[max(2rem,calc(50vw-660px))]" />
-      <div className="shell relative pb-18 pt-16 md:pb-24 md:pt-24">
-        <div className="max-w-4xl">
+      {!aside && (
+        <DiamondCluster className="absolute -right-10 top-1/2 hidden h-80 w-96 -translate-y-1/2 lg:block xl:right-[max(2rem,calc(50vw-660px))]" />
+      )}
+      <div
+        className={`shell relative pb-18 pt-16 md:pb-24 md:pt-24 ${aside ? "lg:grid lg:grid-cols-12 lg:items-center lg:gap-10" : ""}`}
+      >
+        <div className={aside ? "max-w-4xl lg:col-span-7" : "max-w-4xl"}>
           {eyebrow && <div className="reveal eyebrow">{eyebrow}</div>}
           <h1 className="reveal type-h1 mt-6">{title}</h1>
           {sub && <p className="reveal type-h4 mt-6 text-mist">{sub}</p>}
@@ -424,6 +432,7 @@ export function PageHero({
           {text && <p className="reveal type-body-lg mt-8 max-w-2xl">{text}</p>}
           {children && <div className="reveal mt-10">{children}</div>}
         </div>
+        {aside && <div className="hidden lg:col-span-5 lg:block">{aside}</div>}
       </div>
     </section>
   );
@@ -569,6 +578,43 @@ export function SolutionCard({ slug, as: Title = "h2" }: { slug: string; as?: "h
         <Diamond className="h-2.5 w-2.5 text-line transition-colors group-hover:text-brand" />
         <ArrowRight className="h-5 w-5 text-brand transition-transform duration-300 group-hover:translate-x-1.5" />
       </div>
+    </Link>
+  );
+}
+
+// Home page tile: icon, title and an oversized line drawing of the same icon
+// that redraws itself on hover. Place inside a .tile-grid.
+export function SolutionTile({ slug }: { slug: string }) {
+  const s = getSolution(slug)!;
+  const Icon = solutionIcons[slug] ?? Layers;
+  return (
+    <Link
+      to="/solutions/$slug"
+      params={{ slug }}
+      className="group relative isolate flex h-full min-h-72 flex-col overflow-hidden bg-panel p-7 transition-colors duration-500 hover:bg-[#0b3157] md:p-8"
+    >
+      {/* Fine blueprint grid, revealed on hover */}
+      <span
+        aria-hidden
+        className="absolute inset-0 -z-10 opacity-0 transition-opacity duration-500 [background-image:linear-gradient(var(--line)_1px,transparent_1px),linear-gradient(90deg,var(--line)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(circle_at_85%_85%,black,transparent_70%)] group-hover:opacity-60"
+      />
+      {/* Oversized vector: faint at rest, redraws in CS Orange on hover */}
+      <Icon
+        aria-hidden
+        strokeWidth={0.6}
+        className="draw-on-hover absolute -bottom-10 -right-10 -z-10 h-52 w-52 text-white/[0.06] transition-all duration-700 group-hover:-translate-x-2 group-hover:-translate-y-2 group-hover:rotate-[-6deg] group-hover:text-brand/30"
+      />
+      <span
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-brand transition-transform duration-300 group-hover:scale-x-100"
+      />
+      <div className="flex items-start justify-between">
+        <span className="grid h-14 w-14 place-items-center border border-line text-white transition-colors duration-300 group-hover:border-brand group-hover:text-brand">
+          <Icon className="draw-on-hover h-7 w-7" strokeWidth={1.4} />
+        </span>
+        <ArrowUpRight className="h-5 w-5 text-slate-grey transition-all duration-300 group-hover:rotate-45 group-hover:text-brand" />
+      </div>
+      <h3 className="type-h4 mt-auto pt-10 pr-6">{s.title}</h3>
     </Link>
   );
 }

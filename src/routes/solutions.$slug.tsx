@@ -11,6 +11,7 @@ import {
   pad,
   solutionIcons,
 } from "@/components/site";
+import { RealityModel } from "@/components/reality-model";
 import { getSolution, pageMeta, solutions, solutionsPage } from "@/lib/content";
 
 export const Route = createFileRoute("/solutions/$slug")({
@@ -50,6 +51,7 @@ function SolutionPage() {
         }
         title={s.h1}
         text={s.intro}
+        aside={<RealityModel slug={s.slug} tags={s.cards.map((c) => c.t)} />}
       >
         <CTA to="/contact" className="w-full sm:w-auto">
           {button}
