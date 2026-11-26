@@ -386,26 +386,33 @@ export const about = {
   },
 };
 
-// TODO: replace the placeholder names, roles, bios, photos and LinkedIn URLs
-// with the real founders. Put photos in public/leadership/ (square or 4:5).
+// Roles and bios are based on each founder's LinkedIn headline.
+// Photos live in public/leadership/.
 // A person without `img` shows their initials instead of a photo.
 export const leadership = {
   eyebrow: "Leadership",
   heading: "Led by Our Founders",
   people: [
     {
-      name: "Founder Name",
-      role: "Co-Founder & Managing Director",
-      bio: "Short bio: background, years of experience and area of focus.",
-      img: "",
-      linkedin: "https://www.linkedin.com/",
+      name: "Muhammad Jabakhanji",
+      role: "Co-Founder",
+      bio: "Helping built asset owners digitize and optimize. Muhammad leads Concerted Solutions from the UAE, bringing digital engineering and technology to assets across their lifecycle. Stanford University alumnus.",
+      img: "/leadership/muhammad-jabakhanji.jpg",
+      linkedin: "https://www.linkedin.com/in/muhammadjabakhanji/",
     },
     {
-      name: "Founder Name",
-      role: "Co-Founder & Technical Director",
-      bio: "Short bio: background, years of experience and area of focus.",
-      img: "",
-      linkedin: "https://www.linkedin.com/",
+      name: "Diana Al Skaff",
+      role: "BIM & VDC Consultant, Business Development Manager",
+      bio: "Based in Saudi Arabia, Diana advises on BIM and Virtual Design & Construction, with services spanning engineering design, project management and corporate training.",
+      img: "/leadership/diana-al-skaff.jpg",
+      linkedin: "https://www.linkedin.com/in/diana-al-skaff-8019b81b0/",
+    },
+    {
+      name: "Dr. Mousalam Alabdulrazzak",
+      role: "Founder & Executive",
+      bio: "A UAE-based founder and executive focused on future cities and modern construction, bringing doctoral-level expertise to how the region plans, builds and operates its built environment.",
+      img: "/leadership/mousalam-alabdulrazzak.jpg",
+      linkedin: "https://www.linkedin.com/in/mousalam-alabdulrazzak-phd-922050a/",
     },
   ],
 };

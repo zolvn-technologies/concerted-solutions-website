@@ -37,11 +37,11 @@ function About() {
       <section className="border-y border-line bg-panel">
         <div className="shell section">
           <Heading eyebrow={leadership.eyebrow} title={leadership.heading} />
-          <ul className="mt-14 grid gap-px border border-line bg-line md:grid-cols-2">
+          <ul className="mt-14 grid gap-px border border-line bg-line md:grid-cols-2 lg:grid-cols-3">
             {leadership.people.map((p, i) => (
               <li
                 key={`${p.name}-${i}`}
-                className="group relative flex flex-col gap-7 bg-night p-7 sm:flex-row md:p-8"
+                className="group relative flex flex-col gap-7 bg-night p-7 sm:flex-row md:flex-col md:p-8"
               >
                 <span
                   aria-hidden
@@ -50,9 +50,9 @@ function About() {
                 <div className="relative w-40 shrink-0 sm:w-44">
                   <span
                     aria-hidden
-                    className="absolute -bottom-2 -right-2 h-full w-full border border-brand/70 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"
+                    className="absolute -bottom-2 -right-2 h-full w-full rounded-full border border-brand/70 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1"
                   />
-                  <div className="relative aspect-[4/5] overflow-hidden bg-panel">
+                  <div className="relative aspect-square overflow-hidden rounded-full bg-panel ring-2 ring-brand">
                     {p.img ? (
                       <img
                         src={p.img}
